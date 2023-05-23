@@ -22,21 +22,14 @@ def get_data_from_database():
                                     'UID=' + username + ';'
                                     'PWD=' + password + ';')
 
-        # Создаем курсор для выполнения SQL-запросов
-        cursor = connection.cursor()
-
-        # Выполняем SQL-запрос
+        # Выполняем SQL-запрос и получаем результаты в DataFrame
         query = "SELECT * FROM таблица"
-        cursor.execute(query)
+        df = pd.read_sql_query(query, connection)
 
-        # Получаем результаты запроса
-        results = cursor.fetchall()
-
-        # Закрываем курсор и соединение с базой данных
-        cursor.close()
+        # Закрываем соединение с базой данных
         connection.close()
 
-        return results
+        return df
 
     except pyodbc.Error as err:
         print("Ошибка при подключении к базе данных: {}".format(err))
@@ -46,14 +39,14 @@ def get_data_from_database():
 @app.route('/')
 def index():
     # Получаем данные из базы данных
-    data = get_data_from_database()
+    df = get_data_from_database()
 
-    if data:
+    if df is not None:
         # Фильтруем данные по определенному условию
-        filtered_data = [row for row in data if row[2] > 25]
+        filtered_df = df[df['Age'] > 25]
 
         # Преобразуем данные в формат JSON
-        json_data = jsonify(filtered_data)
+        json_data = filtered_df.to_json(orient='records')
 
         return json_data
 
