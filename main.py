@@ -1,14 +1,13 @@
-from config import LOGIN
-from config import PASSWORD
-from flask import Flask, jsonify
+from config import LOGIN, PASSWORD, SERVER, DATABASE
+from flask import Flask
 import pandas as pd
 import pyodbc
 
 app = Flask(__name__)
 
 # Устанавливаем параметры подключения к базе данных
-server = '127.0.0.1'
-database = 'MyDatebase'
+server = SERVER
+database = DATABASE
 username = LOGIN	
 password = PASSWORD
 
