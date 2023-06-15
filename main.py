@@ -1,4 +1,3 @@
-from config import LOGIN, PASSWORD, SERVER, DATABASE
 from flask import Flask
 import pandas as pd
 import pyodbc
@@ -6,10 +5,10 @@ import pyodbc
 app = Flask(__name__)
 
 # Устанавливаем параметры подключения к базе данных
-server = SERVER
-database = DATABASE
-username = LOGIN	
-password = PASSWORD
+server = 'SERVER'
+database = 'DATABASE'
+username = 'LOGIN'	
+password = 'PASSWORD'
 
 
 def get_data_from_database():
