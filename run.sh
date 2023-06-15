@@ -8,4 +8,4 @@ if [ -z "$VIRTUAL_ENV" ]; then
 fi
 
 # Запускаем приложение
-python app.py
+python main.py
