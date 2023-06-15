@@ -4,4 +4,4 @@
 source myenv/bin/activate
 
 # Запуск приложения на Python
-python app.py
+python main.py
