@@ -1,7 +1,11 @@
 #!/bin/bash
 
-# Активация виртуального окружения
-source myenv/bin/activate
+# Проверяем, активировано ли виртуальное окружение
+if [ -z "$VIRTUAL_ENV" ]; then
+  echo "Виртуальное окружение не активировано"
+  # Активируем виртуальное окружение
+  source myenv/bin/activate
+fi
 
-# Запуск приложения на Python
-python main.py
+# Запускаем приложение
+python app.py
