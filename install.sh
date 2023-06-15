@@ -11,5 +11,5 @@ pip install -r requirements.txt
 sudo apt-get update
 sudo apt-get install unixodbc unixodbc-dev --assume-yes
 
-# Запуск приложения на Python
+# Запуск приложения
 python main.py
