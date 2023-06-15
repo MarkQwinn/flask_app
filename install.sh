@@ -28,6 +28,3 @@ source myenv/bin/activate
 
 # Установка зависимостей из requirements.txt
 pip install -r requirements.txt
-
-# Запуск приложения
-python main.py
