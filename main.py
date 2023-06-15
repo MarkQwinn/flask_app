@@ -1,14 +1,22 @@
 from flask import Flask
 import pandas as pd
 import pyodbc
+import configparser
 
 app = Flask(__name__)
 
-# Устанавливаем параметры подключения к базе данных
-server = 'SERVER'
-database = 'DATABASE'
-username = 'LOGIN'	
-password = 'PASSWORD'
+# Загружаем параметры из файла конфигурации
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+# Получаем параметры подключения к базе данных из файла конфигурации
+server = config.get('database', 'server')
+database = config.get('database', 'database')
+username = config.get('database', 'username')
+password = config.get('database', 'password')
+
+# Получаем SQL-запрос и условие фильтрации из файла конфигурации
+sql_query = config.get('query', 'sql_query')
 
 
 def get_data_from_database():
@@ -21,8 +29,7 @@ def get_data_from_database():
                                     'PWD=' + password + ';')
 
         # Выполняем SQL-запрос и получаем результаты в DataFrame
-        query = "SELECT * FROM таблица"
-        df = pd.read_sql_query(query, connection)
+        df = pd.read_sql_query(sql_query, connection)
 
         # Закрываем соединение с базой данных
         connection.close()
@@ -40,11 +47,8 @@ def index():
     df = get_data_from_database()
 
     if df is not None:
-        # Фильтруем данные по определенному условию
-        filtered_df = df[df['Age'] > 25]
-
         # Преобразуем данные в формат JSON
-        json_data = filtered_df.to_json(orient='records')
+        json_data = df.to_json(orient='records')
 
         return json_data
 
