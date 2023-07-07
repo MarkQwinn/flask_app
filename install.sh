@@ -19,8 +19,8 @@ else
 fi
 
 # Установка пакета unixodbc
-sudo apt-get update
-sudo apt-get install unixodbc unixodbc-dev --assume-yes
+sudo apt update
+sudo apt install unixodbc unixodbc-dev --assume-yes
 
 # Создание виртуального окружения
 python3 -m venv myenv
