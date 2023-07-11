@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SMS Status</title>
+</head>
+<body>
+    <h1>SMS Status</h1>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Number</th>
+            <th>ID</th>
+            <th>Status</th>
+            <th>Body</th>
+        </tr>
+        {% for row in rows %}
+        <tr>
+            <td>{{ row.data }}</td>
+            <td>{{ row.nomer }}</td>
+            <td>{{ row.id }}</td>
+            <td>{{ row.status }}</td>
+            <td>{{ row.body }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
